@@ -789,13 +789,13 @@ func getPatternInfo(q *query.Query, opts *getPatternInfoOptions) (*search.TextPa
 
 	if opts.forceFileSearch {
 		for _, v := range q.Values(query.FieldDefault) {
-			includePatterns = append(includePatterns, asString(v))
+			includePatterns = append(includePatterns, v.ToString())
 		}
 	}
 
 	var combyRule []string
 	for _, v := range q.Values(query.FieldCombyRule) {
-		combyRule = append(combyRule, asString(v))
+		combyRule = append(combyRule, v.ToString())
 	}
 
 	// Handle lang: and -lang: filters.
