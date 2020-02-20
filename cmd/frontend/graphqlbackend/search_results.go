@@ -731,17 +731,9 @@ func processSearchPattern(q *query.Query, opts *getPatternInfoOptions) (string, 
 	if opts.performStructuralSearch {
 		isStructuralPat = true
 		for _, v := range patternValues {
-			var piece string
-			switch {
-			case v.String != nil:
-				piece = *v.String
-			case v.Regexp != nil:
-				piece = v.Regexp.String()
+			if piece := v.ToString(); piece != "" {
+				pieces = append(pieces, piece)
 			}
-			if piece == "" {
-				continue
-			}
-			pieces = append(pieces, piece)
 		}
 		pattern = strings.Join(pieces, " ")
 	} else if !opts.forceFileSearch {
